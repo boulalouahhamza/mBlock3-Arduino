@@ -1,0 +1,63 @@
+{	"extensionName": "DHT Sensor",
+	"description": "DHT11/DHT22 temperature and humidity sensor. Uses the bundled mBlockDHT library. Place the 'Setup DHT sensor' block once before reading values, and use the same pin in all blocks. Temperature and humidity are read once and cached for 2 seconds.",
+	"version": "1.1.0",
+	"author": "mBlock DHT Extension",
+	"homepage": "",
+	"sort": 1,
+	"javascriptURL": "js/DHT.js",
+	"firmware": "1.0",
+	"extensionPort": 0,
+	"blockSpecs": [
+		[
+			"w",
+			"Setup DHT sensor on pin %d.pin type %d.dhttype",
+			"DHTSetup",
+			"2",
+			"DHT11",
+			{
+				"encode":"{d0}{d1}",
+				"setup":"dht_{0}.begin();\n",
+				"inc":"#include <mBlockDHT.h>\n",
+				"def":"mBlockDHT dht_{0}({0}, {1});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"Read temperature from DHT on pin %d.pin (°C)",
+			"DHTReadTemperature",
+			"2",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockDHT.h>\n",
+				"def":"",
+				"work":"dht_{0}.readTemperature()",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"Read humidity from DHT on pin %d.pin (%)",
+			"DHTReadHumidity",
+			"2",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockDHT.h>\n",
+				"def":"",
+				"work":"dht_{0}.readHumidity()",
+				"loop":""
+			}
+		]
+	],
+	"menus": {
+		"pin":["2","3","4","5","6","7","8","9","10","11","12","13"],
+		"dhttype":["DHT11","DHT22"]
+	},
+	"values":{
+		"DHT11":11,
+		"DHT22":22
+	}
+}

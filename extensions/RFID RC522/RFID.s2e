@@ -1,0 +1,120 @@
+{
+    "extensionName":  "RFID RC522",
+    "description":  "RFID RC522 (MFRC522) card reader over SPI. Uses the bundled mBlockRFID library. Place the \u0027Setup RFID RC522\u0027 block once before using other blocks, and use the same SS pin in all blocks.",
+    "version":  "1.0.1",
+    "author":  "mBlock RFID Extension",
+    "homepage":  "",
+    "sort":  1,
+    "javascriptURL":  "js/RFID.js",
+    "firmware":  "1.0",
+    "extensionPort":  0,
+    "blockSpecs":  [
+                       [
+                           "w",
+                           "Setup RFID RC522 SS pin %d.sspin RST pin %d.rstpin",
+                           "RFIDSetup",
+                           "10",
+                           "9",
+                           {
+                               "encode":  "{d0}{d1}",
+                               "setup":  "rfid_{0}.begin();\n",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "mBlockRFID rfid_{0}({0}, {1});\n",
+                               "work":  "",
+                               "loop":  ""
+                           }
+                       ],
+                       [
+                           "B",
+                           "RFID card present on SS pin %d.sspin",
+                           "RFIDCardPresent",
+                           "10",
+                           {
+                               "encode":  "{d0}",
+                               "setup":  "",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "",
+                               "work":  "rfid_{0}.cardPresent()",
+                               "loop":  ""
+                           }
+                       ],
+                       [
+                           "R",
+                           "Read RFID UID (hex) on SS pin %d.sspin",
+                           "RFIDReadUID",
+                           "10",
+                           {
+                               "encode":  "{d0}",
+                               "setup":  "",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "",
+                               "work":  "rfid_{0}.readUID()",
+                               "loop":  ""
+                           }
+                       ],
+                       [
+                           "R",
+                           "Read RFID UID (number) on SS pin %d.sspin",
+                           "RFIDReadUIDNumber",
+                           "10",
+                           {
+                               "encode":  "{d0}",
+                               "setup":  "",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "",
+                               "work":  "rfid_{0}.readUIDNumber()",
+                               "loop":  ""
+                           }
+                       ],
+                       [
+                           "B",
+                           "RFID UID on SS pin %d.sspin matches %s",
+                           "RFIDUIDMatches",
+                           "10",
+                           "B7 CB FF 63",
+                           {
+                               "setup":  "",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "",
+                               "work":  "rfid_{0}.uidMatches({1})",
+                               "loop":  ""
+                           }
+                       ],
+                       [
+                           "w",
+                           "Halt RFID card on SS pin %d.sspin",
+                           "RFIDHalt",
+                           "10",
+                           {
+                               "encode":  "{d0}",
+                               "setup":  "",
+                               "inc":  "#include \u003cSPI.h\u003e\n#include \u003cmBlockRFID.h\u003e\n",
+                               "def":  "",
+                               "work":  "rfid_{0}.halt();\n",
+                               "loop":  ""
+                           }
+                       ]
+                   ],
+    "menus":  {
+                  "sspin":  [
+                                "10",
+                                "8",
+                                "7",
+                                "6",
+                                "5",
+                                "4",
+                                "3",
+                                "2"
+                            ],
+                  "rstpin":  [
+                                 "9",
+                                 "8",
+                                 "7",
+                                 "6",
+                                 "5",
+                                 "4",
+                                 "3",
+                                 "2"
+                             ]
+              }
+}

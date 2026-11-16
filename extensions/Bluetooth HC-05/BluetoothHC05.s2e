@@ -1,0 +1,120 @@
+{
+	"extensionName": "Bluetooth HC-05",
+	"description": "Bluetooth Classic (HC-05 / HC-06) text communication. Uses the bundled mBlockBluetooth library on SoftwareSerial. Place the 'Setup Bluetooth' block once before using other blocks, and use the same pins in all blocks.",
+	"version": "1.0.0",
+	"author": "mBlock Bluetooth Extension",
+	"homepage": "",
+	"sort": 1,
+	"javascriptURL": "js/BluetoothHC05.js",
+	"firmware": "1.0",
+	"extensionPort": 0,
+	"blockSpecs": [
+		[
+			"w",
+			"Setup Bluetooth RX pin %d.btpin TX pin %d.btpin baud %d.btbaud",
+			"BluetoothSetup",
+			"10",
+			"11",
+			"9600",
+			{
+				"encode":"{d0}{d1}{d2}",
+				"setup":"mBlockBT.begin({2});\n",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"mBlockBluetooth mBlockBT({0}, {1});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Bluetooth send text %s",
+			"BluetoothSendText",
+			"Hello",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.sendText({0});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Bluetooth send line %s",
+			"BluetoothSendLine",
+			"Hello!",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.sendLine({0});\n",
+				"loop":""
+			}
+		],
+		[
+			"B",
+			"Bluetooth message ready",
+			"BluetoothMessageReady",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.messageReady()",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"Bluetooth message",
+			"BluetoothReadMessage",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.readMessage()",
+				"loop":""
+			}
+		],
+		[
+			"B",
+			"Bluetooth message matches %s",
+			"BluetoothMessageMatches",
+			"on",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.messageMatches({0})",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"Bluetooth message as number",
+			"BluetoothReadNumber",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.readNumber()",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Clear Bluetooth message",
+			"BluetoothClear",
+			{
+				"setup":"",
+				"inc":"#include <mBlockBluetooth.h>\n",
+				"def":"",
+				"work":"mBlockBT.clearMessage();\n",
+				"loop":""
+			}
+		]
+	],
+	"menus": {
+		"btpin":["2","3","4","5","6","7","8","9","10","11","12","13"],
+		"btbaud":["9600","19200","38400","57600","115200"]
+	}
+}

@@ -1,0 +1,100 @@
+{	"extensionName": "IR Receiver VS1838B",
+	"description": "VS1838B infrared receiver (38kHz) with NEC decoding. Uses the bundled mBlockIR library. Place the 'Setup IR receiver' block once before using other blocks, and use the same pin in all blocks. Reading works in the background through a pin change interrupt.",
+	"version": "1.0.1",
+	"author": "mBlock IR Extension",
+	"homepage": "",
+	"sort": 1,
+	"javascriptURL": "js/IRReceiver.js",
+	"firmware": "1.0",
+	"extensionPort": 0,
+	"blockSpecs": [
+		[
+			"w",
+			"Setup IR receiver on pin %d.irpin",
+			"IRSetup",
+			"3",
+			{
+				"encode":"{d0}",
+				"setup":"ir_{0}.begin();\n",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"mBlockIR ir_{0}({0});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"B",
+			"IR button pressed on pin %d.irpin",
+			"IRButtonPressed",
+			"3",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"",
+				"work":"ir_{0}.buttonPressed()",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"IR code (hex) on pin %d.irpin",
+			"IRReadCodeHex",
+			"3",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"",
+				"work":"ir_{0}.readCodeHex()",
+				"loop":""
+			}
+		],
+		[
+			"R",
+			"IR code (number) on pin %d.irpin",
+			"IRReadCode",
+			"3",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"",
+				"work":"ir_{0}.readCode()",
+				"loop":""
+			}
+		],
+		[
+			"B",
+			"IR code on pin %d.irpin matches %s",
+			"IRCodeMatches",
+			"3",
+			"00FFA25D",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"",
+				"work":"ir_{0}.codeMatches({1})",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Clear IR code on pin %d.irpin",
+			"IRClear",
+			"3",
+			{
+				"encode":"{d0}",
+				"setup":"",
+				"inc":"#include <mBlockIR.h>\n",
+				"def":"",
+				"work":"ir_{0}.clear();\n",
+				"loop":""
+			}
+		]
+	],
+	"menus": {
+		"irpin":["2","3"]
+	}
+}
